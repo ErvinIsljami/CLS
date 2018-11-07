@@ -23,7 +23,7 @@ namespace Client
                 try
                 {
                     ConnectToDBM(port);
-                    proxy.ViewTree();
+                    Console.WriteLine(proxy.ViewTree());
                     isConnected = true;
                 }
                 catch

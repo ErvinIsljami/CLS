@@ -17,7 +17,7 @@ namespace Common
         void DeleteFolder(string name);
 
         [OperationContract]
-        void ViewTree();
+        string ViewTree();
 
         [OperationContract]
         void CreateNewFile(string name);

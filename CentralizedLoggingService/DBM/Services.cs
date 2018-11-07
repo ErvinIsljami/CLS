@@ -10,7 +10,8 @@ namespace DBM
 {
     public class Services : IServices
     {
-        private string path = "C:\\Users\\HP\\Desktop\\Projakat\\CLS\\CentralizedLoggingService";
+        string path = "C:\\Users\\HP\\Desktop\\Projakat\\CLS\\CentralizedLoggingService";
+
         public void CreateNewFile(string name) 
         {
             string newPath = path + "\\" + name;
@@ -46,16 +47,16 @@ namespace DBM
             string[] entries = Directory.GetFileSystemEntries(path, "*", SearchOption.AllDirectories);
 
             string[] names = Directory.GetDirectories(path);
-            
 
             Directory.GetParent(path).ToString();
 
             for (int i = 0; i < entries.Count(); i++)
             {
-                Console.WriteLine(entries[i] + "\n");
+                Console.WriteLine(entries[i].Substring(path.Count()) + "\n");
             }
-
-         
         }
+
+
+
     }
 }

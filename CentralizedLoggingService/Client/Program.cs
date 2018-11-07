@@ -14,10 +14,29 @@ namespace Client
         
         static void Main(string[] args)
         {
-            Connect();
+            bool isConnected = false;
+            do
+            {
+                Console.WriteLine("Input your port");
+                string port = Console.ReadLine();
+
+                try
+                {
+                    ConnectToDBM(port);
+                    proxy.ViewTree();
+                    isConnected = true;
+                }
+                catch
+                {
+                    Console.WriteLine("You entered wrong port");
+                    continue;
+                }
+            } while (!isConnected);
+            
 
             do
             {
+              
                 int x = 0;
                 Console.WriteLine("Choose:");
                 Console.WriteLine("1.Create folder");
@@ -26,31 +45,31 @@ namespace Client
                 Console.WriteLine("4.Delete File");
                 Console.WriteLine("5.View File");
 
-                string name = "luka";
-                string name2 = "boskex";
-
-                string name5 = "boske22\\ervin.txt";
-                string name3 = "boske22";
-
-                string path = "C:\\Users\\HP\\Desktop\\Projakat\\CLS\\CentralizedLoggingService";
-
                 x = int.Parse(Console.ReadLine());
                 switch (x)
                 {
                     case 1:
-                        proxy.CreateNewFolder(name3);
+                        Console.WriteLine("Input folder you want to create");
+                        string folderCreate = Console.ReadLine();
+                        proxy.CreateNewFolder(folderCreate);
                         break;
 
                     case 2:
-                        //poziv metode za brisanje foldera
+                        Console.WriteLine("Input folder you want to delete");
+                        string folderDelete = Console.ReadLine();
+                        proxy.DeleteFolder(folderDelete);
                         break;
 
                     case 3:
-                        proxy.CreateNewFile(name5);
+                        Console.WriteLine("Input file you want to create");
+                        string fileCreate = Console.ReadLine();
+                        proxy.CreateNewFile(fileCreate);
                         break;
 
                     case 4:
-                        //poziv metode za brisanje fajla
+                        Console.WriteLine("Input file you want to delete");
+                        string fileDelete = Console.ReadLine();
+                        proxy.DeleteFolder(fileDelete);            
                         break;
 
                     case 5:
@@ -61,12 +80,12 @@ namespace Client
             } while (true);
 
         }
-        public static void Connect()
+        public static void ConnectToDBM(string port)
         {
             var binding = new NetTcpBinding();
             ChannelFactory<IServices> factory = new
            ChannelFactory<IServices>(binding, new
-           EndpointAddress("net.tcp://localhost:6000/DBM"));
+           EndpointAddress("net.tcp://localhost:"+ port +"/DBM"));
             proxy = factory.CreateChannel();
         }
     }

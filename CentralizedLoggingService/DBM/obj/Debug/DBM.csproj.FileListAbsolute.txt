@@ -1,0 +1,10 @@
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\DBM\bin\Debug\DBM.exe.config
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\DBM\bin\Debug\DBM.exe
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\DBM\bin\Debug\DBM.pdb
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\DBM\bin\Debug\Common.dll
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\DBM\bin\Debug\Common.pdb
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\DBM\obj\Debug\DBM.csprojAssemblyReference.cache
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\DBM\obj\Debug\DBM.csproj.CoreCompileInputs.cache
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\DBM\obj\Debug\DBM.csproj.CopyComplete
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\DBM\obj\Debug\DBM.exe
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\DBM\obj\Debug\DBM.pdb

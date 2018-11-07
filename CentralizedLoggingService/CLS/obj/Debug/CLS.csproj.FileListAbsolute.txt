@@ -1,0 +1,7 @@
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\CLS\bin\Debug\CLS.exe.config
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\CLS\bin\Debug\CLS.exe
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\CLS\bin\Debug\CLS.pdb
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\CLS\obj\Debug\CLS.csprojAssemblyReference.cache
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\CLS\obj\Debug\CLS.csproj.CoreCompileInputs.cache
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\CLS\obj\Debug\CLS.exe
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\CLS\obj\Debug\CLS.pdb

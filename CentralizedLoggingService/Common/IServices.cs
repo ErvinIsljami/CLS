@@ -11,19 +11,19 @@ namespace Common
     public interface IServices
     {
         [OperationContract]
-        void CreateNewFolder();
+        void CreateNewFolder(string name);
 
         [OperationContract]
-        void DeleteFolder();
+        void DeleteFolder(string name);
 
         [OperationContract]
         void ViewTree();
 
         [OperationContract]
-        void CreateNewFile();
+        void CreateNewFile(string name);
 
         [OperationContract]
-        void DeleteFile();
+        void DeleteFile(string name);
 
     }
 }

@@ -11,13 +11,13 @@ namespace Common
     public interface ILogger
     {
         [OperationContract]
-        void SetLoggingMethod(string user, LoggingType type);
-
-        [OperationContract]
+        //napravi novy entry za sql i ubaci novu vrednost
         void LogSuccessfulEvent(string user, string method);
  
         [OperationContract]
         void LogErrorEvent(string user, string method, string errorMessage);
 
+        //[OperationContract]
+        //void CriticLevel(string errorMessage);
     }
 }

@@ -11,34 +11,83 @@ namespace DBM
     public class Services : IServices
     {
         private string path = "..\\..\\..\\root";
+        string user = "luka";
+
         public void CreateNewFile(string name)
         {
             string newPath = path + "\\" + name;
 
-            File.Create(path + "\\" + name);
+            try
+            {
+                File.Create(path + "\\" + name);
+                Program.proxy.LogSuccessfulEvent(user, "CreateNewFile");
+                WriteToEventLog.Instance().LogSuccess(user, "CreateNewFile");
+               
+            }
+            catch (Exception e)
+            {
+                Program.proxy.LogErrorEvent(user, "CreateNewFile", e.Message.ToString());
+                WriteToEventLog.Instance().LogFailure(user,"CreateNewFile", "error");
+                throw new Exception(e.Message.ToString());
+            }
         }
 
         public void CreateNewFolder(string name)
         {
-            Directory.CreateDirectory(path + "\\" + name);
+            try
+            {
+                Directory.CreateDirectory(path + "\\" + name);
+                Program.proxy.LogSuccessfulEvent(user, "CreateNewFolder");
+                WriteToEventLog.Instance().LogSuccess(user, "CreateNewFolder");
+            }
+            catch (Exception e)
+            {
+                Program.proxy.LogErrorEvent(user, "CreateNewFolder", e.Message.ToString());
+                WriteToEventLog.Instance().LogFailure(user, "CreateNewFolder", "error");
+                throw new Exception(e.Message.ToString());
+            }
         }
 
         public void DeleteFile(string name)
         {
             string newPath = path + "\\" + name;
-            if (Uri.IsWellFormedUriString(newPath, UriKind.Absolute))
+
+            try
             {
-                File.Delete(path + "\\" + name);
+                if (Uri.IsWellFormedUriString(newPath, UriKind.Absolute))
+                {
+                    File.Delete(path + "\\" + name);
+                    WriteToEventLog.Instance().LogSuccess(user, "DeleteFile");
+                    Program.proxy.LogSuccessfulEvent(user, "DeleteFile");
+                }
+                else
+                {
+                    throw new UriFormatException("Path not valid. The path " + "was not found or well formated");
+                }
             }
-            else
+            catch (Exception e)
             {
-                throw new UriFormatException("Path not valid. The path " + "was not found or well formated");
+                Program.proxy.LogErrorEvent(user, "DeleteFile", e.Message.ToString());
+                WriteToEventLog.Instance().LogFailure(user, "DeleteFile", "error");
+                throw new Exception(e.Message.ToString());
             }
         }
 
         public void DeleteFolder(string name)
         {
-            Directory.Delete(path + "\\" + name);
+            try
+            {
+                Directory.Delete(path + "\\" + name);
+                Program.proxy.LogSuccessfulEvent(user, "DeleteFolder");
+                WriteToEventLog.Instance().LogSuccess(user, "DeleteFolder");
+
+            }
+            catch (Exception e)
+            {
+                Program.proxy.LogErrorEvent(user, "DeleteFolder", e.Message.ToString());
+                WriteToEventLog.Instance().LogFailure(user, "DeleteFolder", "error");
+                throw new Exception(e.Message.ToString());
+            }
         }
 
         public string ViewTree()

@@ -41,9 +41,14 @@ namespace CLS
 
         public static string GetSqlCommand(string user, string method, string errorMsg, string dbmid)
         {
-            //string ret="";
+            StringBuilder msg = new StringBuilder(errorMsg.Count());
+            for(int i = 0; i < errorMsg.Count();i++)
+            {
+                if (errorMsg[i] != '\'')
+                    msg.Append(errorMsg[i]);
+            }
             string ret = "insert into " + databaseName + " (user,method,errMsg,DBMID) values ('" +
-                user + "','" + method + "','" + errorMsg + "', '" + dbmid +"')";
+                user + "','" + method + "','" + msg.ToString() + "', '" + dbmid +"')";
 
             return ret;
         }

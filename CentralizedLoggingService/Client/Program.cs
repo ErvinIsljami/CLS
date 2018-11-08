@@ -36,7 +36,6 @@ namespace Client
 
             do
             {
-              
                 int x = 0;
                 Console.WriteLine("Choose:");
                 Console.WriteLine("1.Create folder");

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
+using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +16,22 @@ namespace DBM
         public static LoggingType type;
         static void Main(string[] args)
         {
+            bool isConnected = false;
+            do
+            {
+                try
+                {
+                    ConnectToCLS();
+                    isConnected = true;
+                    Console.WriteLine("Bole se povezao na Gole");
+                }
+                catch
+                {
+                    Console.WriteLine("You entered wrong port");
+                    continue;
+                }
+            } while (!isConnected);
+
             do
             {
                 Console.WriteLine("Choose type of logging");
@@ -63,15 +80,19 @@ namespace DBM
 
             ServiceHost host = new ServiceHost(typeof(Services));
             host.AddServiceEndpoint(typeof(IServices), binding, address);
+           // host.Authorization.ServiceAuthorizationManager = new MyAuthorizationManager();
+            host.Description.Behaviors.Remove(typeof(ServiceDebugBehavior));
+            host.Description.Behaviors.Add(new ServiceDebugBehavior() { IncludeExceptionDetailInFaults = true });
 
             return host;
         }
+
         public static void ConnectToCLS()
         {
             var binding = new NetTcpBinding();
             ChannelFactory<ILogger> factory = new
            ChannelFactory<ILogger>(binding, new
-           EndpointAddress("net.tcp://localhost:6000/CLS"));
+           EndpointAddress("net.tcp://localhost:12005/CLS"));
             proxy = factory.CreateChannel();
         }
     }

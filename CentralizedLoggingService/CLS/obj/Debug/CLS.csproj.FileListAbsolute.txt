@@ -24,3 +24,15 @@ C:\Users\Ervin\Desktop\CLS\CentralizedLoggingService\CLS\bin\Debug\EntityFramewo
 C:\Users\Ervin\Desktop\CLS\CentralizedLoggingService\CLS\bin\Debug\System.Data.SQLite.xml
 C:\Users\Ervin\Desktop\CLS\CentralizedLoggingService\CLS\bin\Debug\System.Data.SQLite.dll.config
 C:\Users\Ervin\Desktop\CLS\CentralizedLoggingService\CLS\obj\Debug\CLS.csproj.CopyComplete
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\CLS\bin\Debug\Common.dll
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\CLS\bin\Debug\EntityFramework.dll
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\CLS\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\CLS\bin\Debug\System.Data.SQLite.dll
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\CLS\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\CLS\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\CLS\bin\Debug\Common.pdb
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\CLS\bin\Debug\EntityFramework.xml
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\CLS\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\CLS\bin\Debug\System.Data.SQLite.xml
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\CLS\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\CLS\obj\Debug\CLS.csproj.CopyComplete

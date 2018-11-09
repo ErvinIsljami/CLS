@@ -35,6 +35,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.IdentityModel" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -44,8 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Group.cs" />
+    <Compile Include="MyAuthorizationManager.cs" />
+    <Compile Include="MyAuthorizationPolicy.cs" />
+    <Compile Include="MyPrincipal.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RBAC\RBACService.cs" />
     <Compile Include="Services.cs" />
     <Compile Include="WriteToEventLog.cs" />
   </ItemGroup>

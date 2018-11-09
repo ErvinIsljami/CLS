@@ -40,5 +40,6 @@ namespace DBM
         {
             newLog.WriteEntry(string.Format("User {0} failed to access {1}. Reason: {2}.", user, method, reason));
         }
+
     }
 }

@@ -3,16 +3,24 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.AccessControl;
+using System.Security.Permissions;
+using System.Security.Principal;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace DBM
 {
     public class Services : IServices
     {
+        public static WindowsIdentity identity = null;
         private string path = "..\\..\\..\\root";
         string user = "luka";
 
+        [PrincipalPermission(SecurityAction.Demand, Authenticated = true, Role = "ManageFile")]
         public void CreateNewFile(string name)
         {
             string newPath = path + "\\" + name;
@@ -20,9 +28,20 @@ namespace DBM
             try
             {
                 File.Create(path + "\\" + name);
+
+                //FileInfo finfo = new FileInfo(newPath);
+
+                
+                //FileSecurity fsecurity = finfo.GetAccessControl();
+                ////also tried it like this //fsecurity.ResetAccessRule(new FileSystemAccessRule(string.Format(@"{0}\{1}", Environment.UserDomainName.ToString(), Environment.UserDomainName.ToString()), FileSystemRights.FullControl, AccessControlType.Allow));
+                //fsecurity.SetOwner(WindowsIdentity.GetCurrent().User.AccountDomainSid);
+                //finfo.SetAccessControl(fsecurity);
+
+                //Console.WriteLine("OWWWWWWWWWWWNEEEEEEEEEEEER"+finfo.GetAccessControl().GetOwner(typeof(SecurityIdentifier)).Value);
+    
                 Program.proxy.LogSuccessfulEvent(user, "CreateNewFile");
-                WriteToEventLog.Instance().LogSuccess(user, "CreateNewFile");
-               
+                DecideForSuccessful(Program.type);
+
             }
             catch (Exception e)
             {
@@ -32,13 +51,14 @@ namespace DBM
             }
         }
 
+        [PrincipalPermission(SecurityAction.Demand, Authenticated = true, Role = "ManageFolder")]
         public void CreateNewFolder(string name)
         {
             try
             {
                 Directory.CreateDirectory(path + "\\" + name);
                 Program.proxy.LogSuccessfulEvent(user, "CreateNewFolder");
-                WriteToEventLog.Instance().LogSuccess(user, "CreateNewFolder");
+                DecideForSuccessful(Program.type);
             }
             catch (Exception e)
             {
@@ -48,6 +68,7 @@ namespace DBM
             }
         }
 
+        [PrincipalPermission(SecurityAction.Demand, Authenticated = true, Role = "ManageFile")]
         public void DeleteFile(string name)
         {
             string newPath = path + "\\" + name;
@@ -57,7 +78,7 @@ namespace DBM
                 if (Uri.IsWellFormedUriString(newPath, UriKind.Absolute))
                 {
                     File.Delete(path + "\\" + name);
-                    WriteToEventLog.Instance().LogSuccess(user, "DeleteFile");
+                    DecideForSuccessful(Program.type);
                     Program.proxy.LogSuccessfulEvent(user, "DeleteFile");
                 }
                 else
@@ -73,13 +94,14 @@ namespace DBM
             }
         }
 
+        [PrincipalPermission(SecurityAction.Demand, Authenticated = true, Role = "ManageFolder")]
         public void DeleteFolder(string name)
         {
             try
             {
                 Directory.Delete(path + "\\" + name);
                 Program.proxy.LogSuccessfulEvent(user, "DeleteFolder");
-                WriteToEventLog.Instance().LogSuccess(user, "DeleteFolder");
+                DecideForSuccessful(Program.type);
 
             }
             catch (Exception e)
@@ -139,5 +161,65 @@ namespace DBM
             return ret;
         }
 
+        public void DecideForSuccessful(LoggingType type)
+        {
+            if (Program.type.ToString() == "WriteToEventLog")
+                WriteToEventLog.Instance().LogSuccess(user, "CreateNewFile");
+            else if (Program.type.ToString() == "WriteToXml")
+                WriteToXml(user, "CreateNewFile");
+            else
+                Console.WriteLine("WrongChoice");
+        }
+
+        public void WriteToXml(string user, string file2)
+        {
+            //string text = string.Format(" User {0} succesfully accessed {1}", user, file);
+            //using (XmlWriter writer = XmlWriter.Create("Events.xml"))
+            //{
+            //    writer.WriteStartDocument();
+            //    writer.WriteStartElement("Events");
+
+            //    writer.WriteElementString("Message",text);
+            //    writer.WriteEndElement();
+            //   // writer.WriteEndElement();
+            //    writer.WriteEndDocument();
+            //}
+
+            var path = @"C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\DBM\bin\Debug\events.xml";
+
+            if (System.IO.File.Exists(path)) //Decides if the player has a xml file already
+            {
+                //Get data from existing
+                XDocument file = XDocument.Load(path);
+                XElement winTemp = new XElement("playerWin", user);
+               
+                ////delete existing file
+                //File.Delete(Path.Combine(path));
+
+                ////Creates new file using last game played.
+                XDeclaration _obj = new XDeclaration("1.0", "utf-8", "");
+                XNamespace gameSaves = "gameSaves";
+                XElement fileNew = new XElement("Root",
+                                    new XElement("Player",
+                                        new XElement("playerName", file2)
+                                        ));
+
+                file.Save(path);
+            }
+            else //if the player doesn't have a txt file it creates one here
+            {
+                XDeclaration _obj = new XDeclaration("1.0", "utf-8", "");
+                XNamespace gameSaves = "gameSaves";
+                XElement file = new XElement("Root",
+                                    new XElement("Player",
+                                        new XElement("playerName", file2)
+                                        ));
+
+                file.Save(path);
+                Console.WriteLine("Save created: " + path);
+            }
+
+
+        }
     }
 }

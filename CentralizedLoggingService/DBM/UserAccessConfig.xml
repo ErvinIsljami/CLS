@@ -1,0 +1,25 @@
+﻿<?xml version="1.0"?>
+<ArrayOfGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Group>
+    <name>sysReader</name>
+    <Permissions>
+      <Permission>Read</Permission>
+    </Permissions>
+  </Group>
+  <Group>
+    <name>sysUser</name>
+    <Permissions>
+      <Permission>Read</Permission>
+      <Permission>ManageFile</Permission>
+      <Permission>ManageFolder</Permission>
+    </Permissions>
+  </Group>
+  <Group>
+    <name>sysAdmin</name>
+    <Permissions>
+      <Permission>Read</Permission>
+      <Permission>ManageFile</Permission>
+      <Permission>ManageFolder</Permission>
+    </Permissions>
+  </Group>
+</ArrayOfGroup>

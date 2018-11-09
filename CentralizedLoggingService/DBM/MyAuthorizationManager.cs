@@ -8,22 +8,12 @@ using System.Threading.Tasks;
 
 namespace DBM
 {
-    public class MyAuthorizationManager : ServiceAuthorizationManager
+    internal class MyAuthorizationManager : ServiceAuthorizationManager
     {
         protected override bool CheckAccessCore(OperationContext operationContext)
         {
-            bool authorized = false;
-
-            IPrincipal principal = operationContext.ServiceSecurityContext.AuthorizationContext.Properties["Principal"] as IPrincipal;
-
-            string group = string.Format("{0}\\Viewer", Environment.MachineName);
-
-            if (principal.IsInRole(group))
-            {
-                return true;
-            }
-
-            return authorized;
+            MyPrincipal pr = operationContext.ServiceSecurityContext.AuthorizationContext.Properties["Principal"] as MyPrincipal;
+            return pr.IsInRole("Read");
         }
     }
 }

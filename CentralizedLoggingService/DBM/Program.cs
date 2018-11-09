@@ -1,6 +1,7 @@
 ﻿using Common;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Policy;
 using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Description;
@@ -80,10 +81,22 @@ namespace DBM
 
             ServiceHost host = new ServiceHost(typeof(Services));
             host.AddServiceEndpoint(typeof(IServices), binding, address);
-           // host.Authorization.ServiceAuthorizationManager = new MyAuthorizationManager();
+            ServiceSecurityAuditBehavior newAuditBehavior = new ServiceSecurityAuditBehavior();
+
             host.Description.Behaviors.Remove(typeof(ServiceDebugBehavior));
             host.Description.Behaviors.Add(new ServiceDebugBehavior() { IncludeExceptionDetailInFaults = true });
 
+            host.Description.Behaviors.Remove<ServiceSecurityAuditBehavior>();
+            host.Description.Behaviors.Add(newAuditBehavior);
+
+            List<IAuthorizationPolicy> policies = new List<IAuthorizationPolicy>()
+            {
+                new MyAuthorizationPolicy()
+            };
+
+            host.Authorization.ServiceAuthorizationManager = new MyAuthorizationManager();
+            host.Authorization.ExternalAuthorizationPolicies = policies.AsReadOnly();
+            host.Authorization.PrincipalPermissionMode = PrincipalPermissionMode.Custom;
             return host;
         }
 
@@ -95,5 +108,7 @@ namespace DBM
            EndpointAddress("net.tcp://localhost:12005/CLS"));
             proxy = factory.CreateChannel();
         }
+
+        
     }
 }

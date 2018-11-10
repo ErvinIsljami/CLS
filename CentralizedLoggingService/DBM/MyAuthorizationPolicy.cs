@@ -12,7 +12,7 @@ namespace DBM
     public class MyAuthorizationPolicy : IAuthorizationPolicy
     {
         private string id;
-        public string Id { get; private set; }
+        public string Id { get => id; set => id = value; }
 
         public MyAuthorizationPolicy()
         {
@@ -33,5 +33,6 @@ namespace DBM
         }
 
         public ClaimSet Issuer { get; }
+        
     }
 }

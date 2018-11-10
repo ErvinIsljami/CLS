@@ -22,8 +22,6 @@ namespace CLS
 
         static SQLHelper()
         {
-
-            //kreiranje fajla,konekcija i kreiranje tabele
             SQLiteConnection.CreateFile(myDatabaseFileName);
 
             m_dbConnection = new SQLiteConnection("Data Source=" + myDatabaseFileName + ";Version=3;");

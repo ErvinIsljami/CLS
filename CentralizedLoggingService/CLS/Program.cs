@@ -49,18 +49,7 @@ namespace CLS
             N = ConfigurationManager.GetSection("N").ToString();
             M = Int32.Parse(ConfigurationManager.GetSection("M").ToString());
 
-            Logger l = new Logger();
-            l.LogErrorEvent("ervin", "metoda1", "ervinzgreskom");
-            l.LogErrorEvent("ervin2", "metoda2", "ervinzgreskom2");
-            //m = l.LogErrorEvent(user, method, errorMessage);
-            m = l.LogErrorEvent("ervin2", "metoda2", "ervinzgreskom2");
 
-            if(m == 1)
-                Console.WriteLine("For method: {0} Critical level: LOW");
-            else if(m > 1 && m<=M)
-                Console.WriteLine("For method: {0} Critical level: MEDIUM");
-            else if(m>M)
-                Console.WriteLine("For method: {0} Critical level: CRITICAL");
             Console.ReadLine();
 
             host.Close();

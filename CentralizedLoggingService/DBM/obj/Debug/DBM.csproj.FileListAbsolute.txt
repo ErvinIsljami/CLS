@@ -30,3 +30,5 @@ C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\DBM\obj\Debug\DBM.cspro
 C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\DBM\obj\Debug\DBM.csproj.CopyComplete
 C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\DBM\obj\Debug\DBM.exe
 C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\DBM\obj\Debug\DBM.pdb
+C:\Users\Ervin\Desktop\CLS\CentralizedLoggingService\DBM\bin\Debug\Manager.dll
+C:\Users\Ervin\Desktop\CLS\CentralizedLoggingService\DBM\bin\Debug\Manager.pdb

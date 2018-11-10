@@ -61,3 +61,9 @@ C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\CLS\bin\Debug\System.Co
 C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\CLS\bin\Debug\System.Security.AccessControl.dll
 C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\CLS\bin\Debug\System.Security.Permissions.dll
 C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\CLS\bin\Debug\System.Security.Principal.Windows.dll
+C:\Users\Ervin\Desktop\CLS\CentralizedLoggingService\CLS\bin\Debug\Manager.dll
+C:\Users\Ervin\Desktop\CLS\CentralizedLoggingService\CLS\bin\Debug\System.Configuration.ConfigurationManager.dll
+C:\Users\Ervin\Desktop\CLS\CentralizedLoggingService\CLS\bin\Debug\System.Security.AccessControl.dll
+C:\Users\Ervin\Desktop\CLS\CentralizedLoggingService\CLS\bin\Debug\System.Security.Permissions.dll
+C:\Users\Ervin\Desktop\CLS\CentralizedLoggingService\CLS\bin\Debug\System.Security.Principal.Windows.dll
+C:\Users\Ervin\Desktop\CLS\CentralizedLoggingService\CLS\bin\Debug\Manager.pdb

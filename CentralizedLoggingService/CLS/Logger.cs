@@ -10,9 +10,20 @@ namespace CLS
     {
         public int LogErrorEvent(string user, string method, string errorMessage)
         {
+            int crt = SQLHelper.GetCritSqlCommand(user, method, errorMessage);
+            //crt++;
+            //ako je nivo kritican ispisi na konzolu
+            if(crt > 4)
+            {
+                Console.WriteLine("*********ALARM**********");
+               
+            }
+
+
+           
             string sql = SQLHelper.GetSqlCommand(user, method, errorMessage, "DBMID");
             SQLHelper.ExecuteCommand(sql);
-            int crt = SQLHelper.GetCritSqlCommand(user, method, errorMessage);
+
             return crt;
         }
 

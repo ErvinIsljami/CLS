@@ -17,3 +17,13 @@ C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\Client\obj\Debug\Clie
 C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\Client\obj\Debug\Client.csproj.CopyComplete
 C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\Client\obj\Debug\Client.exe
 C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\Client\obj\Debug\Client.pdb
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\Client\bin\Debug\Client.exe.config
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\Client\bin\Debug\Client.exe
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\Client\bin\Debug\Client.pdb
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\Client\bin\Debug\Common.dll
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\Client\bin\Debug\Common.pdb
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\Client\obj\Debug\Client.csprojAssemblyReference.cache
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\Client\obj\Debug\Client.csproj.CopyComplete
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\Client\obj\Debug\Client.exe
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\Client\obj\Debug\Client.pdb

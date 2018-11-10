@@ -14,8 +14,7 @@ namespace CLS
         //    //medium level - u periodu od N sekundi/minuta detektuje M puta neuspesan dogadjaj od bilo kog cls klijenta
         //    //critical level - za N min/sec detektuje M+1 neuspesan pokusaj pristupanja od bilo kog cls klijenta
 
-        string tablename = "Tabela";
-        int counter = 0;
+
 
         public void CallSQLWithError(string user, string method, string errorMessage)
         {

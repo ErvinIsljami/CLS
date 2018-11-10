@@ -15,10 +15,9 @@ namespace CLS
         static SQLiteConnection m_dbConnection;
         static string myDatabaseFileName = "MyDatabase.sqlite";
         static string databaseName = "Tabela";
-        static string ret;
         static DateTime timenow;
         static DateTime timemin;
-        static int N;
+        static string N;
         static int M;
 
         static SQLHelper()
@@ -40,7 +39,7 @@ namespace CLS
             SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
             command.ExecuteNonQuery();
 
-            N = Int32.Parse(ConfigurationManager.GetSection("N").ToString());
+            N = ConfigurationManager.GetSection("N").ToString();
             M = Int32.Parse(ConfigurationManager.GetSection("M").ToString());
         }
         
@@ -64,14 +63,14 @@ namespace CLS
 
             return ret;
         }
-        public static int GetCritSqlCommand(string user, string method, string errorMsg, string time)
+        public static int GetCritSqlCommand(string user, string method, string errorMsg)
         {
             // time = 2/30
+            string time = N;
             string[] minutes = time.Split('/');
             timemin = DateTime.Now;
             timenow = DateTime.Now;
 
-            
 
 
             timemin = timemin.AddMinutes((Int32.Parse(minutes[0])) * -1);

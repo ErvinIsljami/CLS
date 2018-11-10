@@ -2,6 +2,7 @@
 using Manager;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
@@ -15,6 +16,9 @@ namespace CLS
     class Program
     {
         public static ServiceHost host;
+        static int m;
+        static string N;
+        static int M;
 
         static void Main(string[] args)
         {
@@ -32,7 +36,6 @@ namespace CLS
             {
                 try
                 {
-                    host = HostServices();
                     host.Open();
                 }
                 catch
@@ -41,12 +44,23 @@ namespace CLS
                     continue;
                 }
             } while (false);
+            //int LogErrorEvent(string user, string method, string errorMessage)
+
+            N = ConfigurationManager.GetSection("N").ToString();
+            M = Int32.Parse(ConfigurationManager.GetSection("M").ToString());
 
             Logger l = new Logger();
             l.LogErrorEvent("ervin", "metoda1", "ervinzgreskom");
             l.LogErrorEvent("ervin2", "metoda2", "ervinzgreskom2");
+            //m = l.LogErrorEvent(user, method, errorMessage);
+            m = l.LogErrorEvent("ervin2", "metoda2", "ervinzgreskom2");
 
-            Console.WriteLine("Services is opened. Press <enter> to finish...");
+            if(m == 1)
+                Console.WriteLine("For method: {0} Critical level: LOW");
+            else if(m > 1 && m<=M)
+                Console.WriteLine("For method: {0} Critical level: MEDIUM");
+            else if(m>M)
+                Console.WriteLine("For method: {0} Critical level: CRITICAL");
             Console.ReadLine();
 
             host.Close();

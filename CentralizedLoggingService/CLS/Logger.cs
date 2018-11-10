@@ -8,19 +8,12 @@ namespace CLS
 {
     public class Logger : ILogger
     {
-        int counter1 = 0;
-        int counter2 = 0;
-        int counter3 = 0;
-        int counter4 = 0;
-        int counter5 = 0;
-        int counter6 = 0;
-        public void LogErrorEvent(string user, string method, string errorMessage)
+        public int LogErrorEvent(string user, string method, string errorMessage)
         {
             string sql = SQLHelper.GetSqlCommand(user, method, errorMessage, "DBMID");
             SQLHelper.ExecuteCommand(sql);
-            int crt = SQLHelper.GetCritSqlCommand(user, method, errorMessage, "vreme");
-            //SQLHelper.ExecuteCommand(crt);      //select upit koji vrati sql tabelu
-            
+            int crt = SQLHelper.GetCritSqlCommand(user, method, errorMessage);
+            return crt;
         }
 
         public void LogSuccessfulEvent(string user, string method)

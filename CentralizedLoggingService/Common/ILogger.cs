@@ -15,7 +15,7 @@ namespace Common
         void LogSuccessfulEvent(string user, string method);
  
         [OperationContract]
-        void LogErrorEvent(string user, string method, string errorMessage);
+        int LogErrorEvent(string user, string method, string errorMessage);
 
         //[OperationContract]
         //void CriticLevel(string errorMessage);

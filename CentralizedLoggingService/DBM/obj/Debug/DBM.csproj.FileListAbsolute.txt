@@ -18,3 +18,5 @@ C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\DBM\obj\Debug\DBM.csp
 C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\DBM\obj\Debug\DBM.csproj.CopyComplete
 C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\DBM\obj\Debug\DBM.exe
 C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\DBM\obj\Debug\DBM.pdb
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\DBM\bin\Debug\Manager.dll
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\DBM\bin\Debug\Manager.pdb

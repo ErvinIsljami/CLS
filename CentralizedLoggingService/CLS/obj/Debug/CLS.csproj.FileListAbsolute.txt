@@ -36,3 +36,5 @@ C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\CLS\obj\Debug\CLS.csp
 C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\CLS\obj\Debug\CLS.csproj.CopyComplete
 C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\CLS\obj\Debug\CLS.exe
 C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\CLS\obj\Debug\CLS.pdb
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\CLS\bin\Debug\Manager.dll
+C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\CLS\bin\Debug\Manager.pdb

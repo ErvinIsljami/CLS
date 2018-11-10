@@ -1,4 +1,16 @@
-﻿using Common;
+﻿
+//FileInfo finfo = new FileInfo(newPath);
+
+
+//FileSecurity fsecurity = finfo.GetAccessControl();
+////also tried it like this //fsecurity.ResetAccessRule(new FileSystemAccessRule(string.Format(@"{0}\{1}", Environment.UserDomainName.ToString(), Environment.UserDomainName.ToString()), FileSystemRights.FullControl, AccessControlType.Allow));
+//fsecurity.SetOwner(WindowsIdentity.GetCurrent().User.AccountDomainSid);
+//finfo.SetAccessControl(fsecurity);
+
+//Console.WriteLine("OWWWWWWWWWWWNEEEEEEEEEEEER"+finfo.GetAccessControl().GetOwner(typeof(SecurityIdentifier)).Value);
+
+
+using Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,16 +41,6 @@ namespace DBM
             {
                 File.Create(path + "\\" + name);
 
-                //FileInfo finfo = new FileInfo(newPath);
-
-                
-                //FileSecurity fsecurity = finfo.GetAccessControl();
-                ////also tried it like this //fsecurity.ResetAccessRule(new FileSystemAccessRule(string.Format(@"{0}\{1}", Environment.UserDomainName.ToString(), Environment.UserDomainName.ToString()), FileSystemRights.FullControl, AccessControlType.Allow));
-                //fsecurity.SetOwner(WindowsIdentity.GetCurrent().User.AccountDomainSid);
-                //finfo.SetAccessControl(fsecurity);
-
-                //Console.WriteLine("OWWWWWWWWWWWNEEEEEEEEEEEER"+finfo.GetAccessControl().GetOwner(typeof(SecurityIdentifier)).Value);
-    
                 Program.proxy.LogSuccessfulEvent(user, "CreateNewFile");
                 DecideForSuccessful(Program.type);
 
@@ -173,18 +175,8 @@ namespace DBM
 
         public void WriteToXml(string user, string file2)
         {
-            //string text = string.Format(" User {0} succesfully accessed {1}", user, file);
-            //using (XmlWriter writer = XmlWriter.Create("Events.xml"))
-            //{
-            //    writer.WriteStartDocument();
-            //    writer.WriteStartElement("Events");
-
-            //    writer.WriteElementString("Message",text);
-            //    writer.WriteEndElement();
-            //   // writer.WriteEndElement();
-            //    writer.WriteEndDocument();
-            //}
-
+            string text = string.Format(" User {0} succesfully accessed {1}", user, file2);
+           
             var path = @"C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\DBM\bin\Debug\events.xml";
 
             if (System.IO.File.Exists(path)) //Decides if the player has a xml file already
@@ -218,8 +210,16 @@ namespace DBM
                 file.Save(path);
                 Console.WriteLine("Save created: " + path);
             }
+        }
 
+        public void WriteToFile(string name, string text)
+        {
+            string file_path = path + "\\" + name;
 
+            using (StreamWriter outputFile = new StreamWriter(file_path))
+            {
+                outputFile.Write(text);
+            }
         }
     }
 }

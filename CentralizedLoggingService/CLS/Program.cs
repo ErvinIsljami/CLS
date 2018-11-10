@@ -19,23 +19,25 @@ namespace CLS
         static void Main(string[] args)
         {
 
-            string srvCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name);
-            host.Credentials.ClientCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
-            host.Credentials.ClientCertificate.Authentication.CustomCertificateValidator = new ServiceCertValidator();
-
-            ///If CA doesn't have a CRL associated, WCF blocks every client because it cannot be validated
-            host.Credentials.ClientCertificate.Authentication.RevocationMode = X509RevocationMode.NoCheck;
-
-            ///Set appropriate service's certificate on the host. Use CertManager class to obtain the certificate based on the "srvCertCN"
-            host.Credentials.ServiceCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN);
+           host = HostServices();
+            
+           // string srvCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name);
+           // host.Credentials.ClientCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
+           // host.Credentials.ClientCertificate.Authentication.CustomCertificateValidator = new ServiceCertValidator();
+           //
+           // ///If CA doesn't have a CRL associated, WCF blocks every client because it cannot be validated
+           // host.Credentials.ClientCertificate.Authentication.RevocationMode = X509RevocationMode.NoCheck;
+           //
+           // ///Set appropriate service's certificate on the host. Use CertManager class to obtain the certificate based on the "srvCertCN"
+           // host.Credentials.ServiceCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN);
             do
             {
                 try
                 {
-                    host = HostServices();
+                    
                     host.Open();
                 }
-                catch
+                catch(Exception e)
                 {
                     Console.WriteLine("Port alredy taken.");
                     continue;
@@ -59,7 +61,7 @@ namespace CLS
             NetTcpBinding binding = new NetTcpBinding();
             string address = "net.tcp://localhost:12005/CLS";
 
-            binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
+           // binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
 
             ServiceHost host = new ServiceHost(typeof(Logger));
             host.AddServiceEndpoint(typeof(ILogger), binding, address);

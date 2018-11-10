@@ -43,6 +43,7 @@ namespace Client
                 Console.WriteLine("3.Create File");
                 Console.WriteLine("4.Delete File");
                 Console.WriteLine("5.View File");
+                Console.WriteLine("6.Write to File");
 
                 x = int.Parse(Console.ReadLine());
                 switch (x)
@@ -74,6 +75,15 @@ namespace Client
                     case 5:
                         proxy.ViewTree();
                         break;
+
+                    case 6:
+                        Console.WriteLine("Input path and name of file you want to write");
+                        string name_and_path = Console.ReadLine();
+                        Console.WriteLine("Input text");
+                        string text = Console.ReadLine();
+                        proxy.WriteToFile(name_and_path, text);
+                        break;
+
                 }
 
             } while (true);

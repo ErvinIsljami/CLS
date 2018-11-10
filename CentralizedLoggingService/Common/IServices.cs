@@ -25,5 +25,8 @@ namespace Common
         [OperationContract]
         void DeleteFile(string name);
 
+        [OperationContract]
+        void WriteToFile(string name, string text);
+
     }
 }

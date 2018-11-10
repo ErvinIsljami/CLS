@@ -10,3 +10,9 @@ C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\Common\obj\Debug\Comm
 C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
 C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\Common\obj\Debug\Common.dll
 C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\Common\obj\Debug\Common.pdb
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\Common\bin\Debug\Common.dll
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\Common\bin\Debug\Common.pdb
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\Common\obj\Debug\Common.csprojAssemblyReference.cache
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\Common\obj\Debug\Common.dll
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\Common\obj\Debug\Common.pdb

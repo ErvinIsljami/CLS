@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,22 +15,16 @@ namespace CLS
         //    //critical level - za N min/sec detektuje M+1 neuspesan pokusaj pristupanja od bilo kog cls klijenta
 
         string tablename = "Tabela";
-
-        
+        int counter = 0;
 
         public void CallSQLWithError(string user, string method, string errorMessage)
         {
-            string crtlvl = "SELECT * FROM " + tablename + " WHERE " + errorMessage + " IS NOT NULL;";
-            //string sql = SQLHelper.GetSqlCommand(user, method, errorMessage, "DBMID");
-            SQLHelper.ExecuteCommand(crtlvl);
-            
-            //foreach (DataRow dataRow in Table.Rows)
-            //{
-            //    foreach (var item in dataRow.ItemArray)
-            //    {
-            //        Console.WriteLine(item);
-            //    }
-            //}
+
+        }
+
+        public void CheckIfCrit()
+        {
+
         }
     }
 }

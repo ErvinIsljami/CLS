@@ -18,3 +18,15 @@ C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\DBM\obj\Debug\DBM.csp
 C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\DBM\obj\Debug\DBM.csproj.CopyComplete
 C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\DBM\obj\Debug\DBM.exe
 C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\DBM\obj\Debug\DBM.pdb
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\DBM\bin\Debug\DBM.exe.config
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\DBM\bin\Debug\DBM.exe
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\DBM\bin\Debug\DBM.pdb
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\DBM\bin\Debug\Common.dll
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\DBM\bin\Debug\Manager.dll
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\DBM\bin\Debug\Common.pdb
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\DBM\bin\Debug\Manager.pdb
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\DBM\obj\Debug\DBM.csprojAssemblyReference.cache
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\DBM\obj\Debug\DBM.csproj.CoreCompileInputs.cache
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\DBM\obj\Debug\DBM.csproj.CopyComplete
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\DBM\obj\Debug\DBM.exe
+C:\Users\Goran\Desktop\CLS\CLS\CentralizedLoggingService\DBM\obj\Debug\DBM.pdb

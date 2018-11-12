@@ -28,7 +28,14 @@ namespace DBM
 
             IIdentity identity = (evaluationContext.Properties["Identities"] as List<IIdentity>)?[0];
            // Services.identity = identity;
-            evaluationContext.Properties.Add("Principal", new MyPrincipal(identity));
+           try
+            {
+                evaluationContext.Properties.Add("Principal", new MyPrincipal(identity));
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
             return true;
         }
 

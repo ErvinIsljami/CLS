@@ -76,7 +76,7 @@ namespace DBM.RBAC
             List<Group> groups;
             XmlSerializer serializer = new XmlSerializer(typeof(List<Group>));
             //ccccchangeee
-            using (FileStream fs = File.Open(@"C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\DBM\UserAccessConfig.xml", FileMode.OpenOrCreate))
+            using (FileStream fs = File.Open(@"..\..\UserAccessConfig.xml", FileMode.OpenOrCreate))
             {
                 groups = serializer.Deserialize(fs) as List<Group>;
             }
@@ -101,7 +101,7 @@ namespace DBM.RBAC
                 groupsList.Add(new Group(group.Key) { Permissions = group.Value });
             }
          
-            using (FileStream fs = File.Open(@"C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\DBM\UserAccessConfig.xml", FileMode.OpenOrCreate))
+            using (FileStream fs = File.Open(@"..\..\UserAccessConfig.xml", FileMode.OpenOrCreate))
             {
                 serializer.Serialize(fs, groupsList);
             }

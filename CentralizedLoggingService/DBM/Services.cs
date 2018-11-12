@@ -1,14 +1,9 @@
-﻿
-//FileInfo finfo = new FileInfo(newPath);
-
-
+﻿//FileInfo finfo = new FileInfo(newPath);
 //FileSecurity fsecurity = finfo.GetAccessControl();
 ////also tried it like this //fsecurity.ResetAccessRule(new FileSystemAccessRule(string.Format(@"{0}\{1}", Environment.UserDomainName.ToString(), Environment.UserDomainName.ToString()), FileSystemRights.FullControl, AccessControlType.Allow));
 //fsecurity.SetOwner(WindowsIdentity.GetCurrent().User.AccountDomainSid);
 //finfo.SetAccessControl(fsecurity);
-
 //Console.WriteLine("OWWWWWWWWWWWNEEEEEEEEEEEER"+finfo.GetAccessControl().GetOwner(typeof(SecurityIdentifier)).Value);
-
 
 using Common;
 using System;
@@ -18,6 +13,7 @@ using System.Linq;
 using System.Security.AccessControl;
 using System.Security.Permissions;
 using System.Security.Principal;
+using System.ServiceModel;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -39,11 +35,16 @@ namespace DBM
 
             try
             {
-                File.Create(path + "\\" + name);
+                if(File.Exists(newPath))
+                {
+                    DatabaseException db = new DatabaseException();
+                    db.Reason = "File alredy exists.";
+                    throw new FaultException<DatabaseException>(db);
+                }
+                File.Create(newPath);
 
                 Program.proxy.LogSuccessfulEvent(user, "CreateNewFile");
                 DecideForSuccessful(Program.type);
-
             }
             catch (Exception e)
             {
@@ -58,6 +59,7 @@ namespace DBM
         {
             try
             {
+                
                 Directory.CreateDirectory(path + "\\" + name);
                 Program.proxy.LogSuccessfulEvent(user, "CreateNewFolder");
                 DecideForSuccessful(Program.type);
@@ -104,7 +106,6 @@ namespace DBM
                 Directory.Delete(path + "\\" + name);
                 Program.proxy.LogSuccessfulEvent(user, "DeleteFolder");
                 DecideForSuccessful(Program.type);
-
             }
             catch (Exception e)
             {
@@ -113,6 +114,19 @@ namespace DBM
                 throw new Exception(e.Message.ToString());
             }
         }
+
+        [PrincipalPermission(SecurityAction.Demand, Authenticated = true, Role = "ManageFolder")]
+        public void WriteToFile(string name, string text)
+        {
+            string file_path = path + "\\" + name;
+
+            using (StreamWriter outputFile = new StreamWriter(file_path))
+            {
+                outputFile.Write(text);
+            }
+        }
+
+
 
         public string ViewTree()
         {
@@ -177,7 +191,7 @@ namespace DBM
         {
             string text = string.Format(" User {0} succesfully accessed {1}", user, file2);
            
-            var path = @"C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\DBM\bin\Debug\events.xml";
+            var path = @"C:\Users\Ervin\Desktop\CLS\CentralizedLoggingService\DBM\bin\Debug\events.xml";
 
             if (System.IO.File.Exists(path)) //Decides if the player has a xml file already
             {
@@ -209,16 +223,6 @@ namespace DBM
 
                 file.Save(path);
                 Console.WriteLine("Save created: " + path);
-            }
-        }
-
-        public void WriteToFile(string name, string text)
-        {
-            string file_path = path + "\\" + name;
-
-            using (StreamWriter outputFile = new StreamWriter(file_path))
-            {
-                outputFile.Write(text);
             }
         }
     }

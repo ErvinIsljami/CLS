@@ -22,7 +22,7 @@ namespace DBM
             {
                 try
                 {
-                    ConnectToCLS();
+                    //ConnectToCLS();
                     isConnected = true;
                     Console.WriteLine("Bole se povezao na Gole");
                 }
@@ -84,7 +84,7 @@ namespace DBM
             ServiceSecurityAuditBehavior newAuditBehavior = new ServiceSecurityAuditBehavior();
 
             host.Description.Behaviors.Remove(typeof(ServiceDebugBehavior));
-            host.Description.Behaviors.Add(new ServiceDebugBehavior() { IncludeExceptionDetailInFaults = true });
+            host.Description.Behaviors.Add(new ServiceDebugBehavior() { IncludeExceptionDetailInFaults = false });
 
             host.Description.Behaviors.Remove<ServiceSecurityAuditBehavior>();
             host.Description.Behaviors.Add(newAuditBehavior);

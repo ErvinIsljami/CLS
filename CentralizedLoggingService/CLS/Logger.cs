@@ -8,19 +8,22 @@ namespace CLS
 {
     public class Logger : ILogger
     {
+        private string N;
+        private int M;
+
+        public Logger()
+        {
+            N = System.Configuration.ConfigurationManager.AppSettings["N"];
+            M = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["M"]);
+        }
         public int LogErrorEvent(string user, string method, string errorMessage)
         {
-            int crt = SQLHelper.GetCritSqlCommand(user, method, errorMessage);
-            //crt++;
-            //ako je nivo kritican ispisi na konzolu
+            int crt = SQLHelper.GetCritcalLevel(method, errorMessage, N, M);
             if(crt > 4)
             {
                 Console.WriteLine("*********ALARM**********");
-               
             }
 
-
-           
             string sql = SQLHelper.GetSqlCommand(user, method, errorMessage, "DBMID");
             SQLHelper.ExecuteCommand(sql);
 

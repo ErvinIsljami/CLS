@@ -27,7 +27,7 @@ namespace CLS
             m_dbConnection = new SQLiteConnection("Data Source=" + myDatabaseFileName + ";Version=3;");
             m_dbConnection.Open();
 
-            string sql = "create table " + databaseName + " (user varchar(20)," +
+            string sql = "create table if not exist" + databaseName + " (user varchar(20)," +
                 "method varchar(30)," +
                 "errMsg varchar(90)," +
                 "DBMID varchar(50)," +
@@ -42,12 +42,11 @@ namespace CLS
         }
         
 
-        public static void ExecuteCommand(string commands)
+        public static int ExecuteCommand(string commands)
         {
             SQLiteCommand command = new SQLiteCommand(commands, m_dbConnection);
-            command.ExecuteNonQuery();
+            return command.ExecuteNonQuery();
         }
-
         public static string GetSqlCommand(string user, string method, string errorMsg, string dbmid)
         {
             StringBuilder msg = new StringBuilder(errorMsg.Count());
@@ -61,15 +60,13 @@ namespace CLS
 
             return ret;
         }
-        public static int GetCritSqlCommand(string user, string method, string errorMsg)
+        public static int GetCritcalLevel(string method, string errorMsg, string N, int M)
         {
             // time = 2/30
             string time = N;
             string[] minutes = time.Split('/');
             timemin = DateTime.Now;
             timenow = DateTime.Now;
-
-
 
             timemin = timemin.AddMinutes((Int32.Parse(minutes[0])) * -1);
             timemin = timemin.AddSeconds((Int32.Parse(minutes[1])) * -1);
@@ -78,7 +75,6 @@ namespace CLS
             SQLiteCommand command = new SQLiteCommand(crtlvl, m_dbConnection);
 
             int a = command.ExecuteNonQuery();
-            //a ti vraca broj redova rezultata commande
 
             return a;
             
@@ -93,6 +89,4 @@ namespace CLS
  * ervin write cannotwrite 12:02 - medium
  * ervin write cannotwrite 12:02 - medium
  * ervin write cannotwrite 12:03 - critical
- * 
- * 
  */

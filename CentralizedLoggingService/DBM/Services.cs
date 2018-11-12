@@ -24,9 +24,20 @@ namespace DBM
 {
     public class Services : IServices
     {
-        public static WindowsIdentity identity = null;
         private string path = "..\\..\\..\\root";
-        string user = "luka";
+        public static string user = null;
+
+        public static string NameOfUser()
+        {
+            string ret;
+            IIdentity id = Thread.CurrentPrincipal.Identity;
+            WindowsIdentity Identity = id as WindowsIdentity;
+
+            Console.WriteLine("Name of user" + Identity.Name);
+            ret = Identity.Name;
+
+            return ret;
+        }
 
         [PrincipalPermission(SecurityAction.Demand, Authenticated = true, Role = "ManageFile")]
         public void CreateNewFile(string name)
@@ -35,21 +46,20 @@ namespace DBM
 
             try
             {
-                if(File.Exists(newPath))
+                if (File.Exists(newPath))
                 {
                     DatabaseException db = new DatabaseException();
                     db.Reason = "File alredy exists.";
                     throw new FaultException<DatabaseException>(db);
                 }
                 File.Create(newPath);
-
-                Program.proxy.LogSuccessfulEvent(user, "CreateNewFile");
-                DecideForSuccessful(Program.type);
+                //Program.proxy.LogSuccessfulEvent(user, "CreateNewFile");
+                DecideForSuccessful(Program.type, "CreateNewFile");
             }
             catch (Exception e)
             {
-                Program.proxy.LogErrorEvent(user, "CreateNewFile", e.Message.ToString());
-                WriteToEventLog.Instance().LogFailure(user,"CreateNewFile", "error");
+                //Program.proxy.LogErrorEvent(user, "CreateNewFile", e.Message.ToString());
+                DecideForUnSuccessful(Program.type, "CreateNewFile", e.Message);
                 throw new Exception(e.Message.ToString());
             }
         }
@@ -59,15 +69,14 @@ namespace DBM
         {
             try
             {
-                
                 Directory.CreateDirectory(path + "\\" + name);
-                Program.proxy.LogSuccessfulEvent(user, "CreateNewFolder");
-                DecideForSuccessful(Program.type);
+                //Program.proxy.LogSuccessfulEvent(user, "CreateNewFolder");
+                DecideForSuccessful(Program.type, "CreateNewFolder");
             }
             catch (Exception e)
             {
-                Program.proxy.LogErrorEvent(user, "CreateNewFolder", e.Message.ToString());
-                WriteToEventLog.Instance().LogFailure(user, "CreateNewFolder", "error");
+                //Program.proxy.LogErrorEvent(user, "CreateNewFolder", e.Message.ToString());
+                DecideForUnSuccessful(Program.type, "CreateNewFile", e.Message);
                 throw new Exception(e.Message.ToString());
             }
         }
@@ -82,8 +91,8 @@ namespace DBM
                 if (Uri.IsWellFormedUriString(newPath, UriKind.Absolute))
                 {
                     File.Delete(path + "\\" + name);
-                    DecideForSuccessful(Program.type);
-                    Program.proxy.LogSuccessfulEvent(user, "DeleteFile");
+                    DecideForSuccessful(Program.type, "DeleteFile");
+                    //Program.proxy.LogSuccessfulEvent(user, "DeleteFile");
                 }
                 else
                 {
@@ -92,8 +101,8 @@ namespace DBM
             }
             catch (Exception e)
             {
-                Program.proxy.LogErrorEvent(user, "DeleteFile", e.Message.ToString());
-                WriteToEventLog.Instance().LogFailure(user, "DeleteFile", "error");
+                //Program.proxy.LogErrorEvent(user, "DeleteFile", e.Message.ToString());
+                DecideForUnSuccessful(Program.type, "DeleteFile", e.Message);
                 throw new Exception(e.Message.ToString());
             }
         }
@@ -104,13 +113,13 @@ namespace DBM
             try
             {
                 Directory.Delete(path + "\\" + name);
-                Program.proxy.LogSuccessfulEvent(user, "DeleteFolder");
-                DecideForSuccessful(Program.type);
+                //Program.proxy.LogSuccessfulEvent(user, "DeleteFolder");
+                DecideForSuccessful(Program.type, "DeleteFolder");
             }
             catch (Exception e)
             {
-                Program.proxy.LogErrorEvent(user, "DeleteFolder", e.Message.ToString());
-                WriteToEventLog.Instance().LogFailure(user, "DeleteFolder", "error");
+                //Program.proxy.LogErrorEvent(user, "DeleteFolder", e.Message.ToString());
+                DecideForUnSuccessful(Program.type, "DeleteFolder", e.Message);
                 throw new Exception(e.Message.ToString());
             }
         }
@@ -120,16 +129,35 @@ namespace DBM
         {
             string file_path = path + "\\" + name;
 
-            using (StreamWriter outputFile = new StreamWriter(file_path))
+            if (File.Exists(file_path))
             {
-                outputFile.Write(text);
+                DatabaseException e = new DatabaseException();
+                e.Reason = "File doesn't exist";
+                throw new FaultException<DatabaseException>(e);
+
             }
+            try
+            {
+                using (StreamWriter outputFile = new StreamWriter(file_path))
+                {
+                    outputFile.Write(text);
+                    //Program.proxy.LogSuccessfulEvent(user, "WriteToFile");
+                    DecideForSuccessful(Program.type, "WriteToFile");
+                }
+            }
+            catch (Exception e)
+            {
+                //Program.proxy.LogErrorEvent(user, "WriteToFile", e.Message.ToString());
+                DecideForUnSuccessful(Program.type, "WriteToFile", e.Message);
+            }
+
         }
 
 
-
+        [PrincipalPermission(SecurityAction.Demand, Authenticated = true, Role = "Read")]
         public string ViewTree()
         {
+            user = NameOfUser();
             int numberOfTabs = 0;
             return PrintTree(this.path, ref (numberOfTabs));
         }
@@ -149,7 +177,7 @@ namespace DBM
             {
                 string[] folders = folder.Split('\\');
                 for (int i = 0; i < numberOfTabs; i++)  //print tabs
-                    ret += "\t";
+                    ret += "  ";
 
                 ret += folders[folders.Count() - 1] + "\n"; //print folder name
                 numberOfTabs++;
@@ -169,20 +197,31 @@ namespace DBM
                 string[] files = file.Split('\\');
                 for (int i = 0; i < numberOfTabs; i++)
                 {
-                    ret += "\t";
+                    ret += "  ";
                 }
-                ret += files[files.Count() - 1] + "\n";
+                
+                ret += "└" + files[files.Count() - 1] + "\n";
             }
 
             return ret;
         }
 
-        public void DecideForSuccessful(LoggingType type)
+        public void DecideForSuccessful(LoggingType type, string method)
         {
             if (Program.type.ToString() == "WriteToEventLog")
-                WriteToEventLog.Instance().LogSuccess(user, "CreateNewFile");
+                WriteToEventLog.Instance().LogSuccess(user, method);
             else if (Program.type.ToString() == "WriteToXml")
-                WriteToXml(user, "CreateNewFile");
+                WriteToXml(user, method);
+            else
+                Console.WriteLine("WrongChoice");
+        }
+
+        public void DecideForUnSuccessful(LoggingType type, string method, string error)
+        {
+            if (Program.type.ToString() == "WriteToEventLog")
+                WriteToEventLog.Instance().LogFailure(user, method, "error");
+            else if (Program.type.ToString() == "WriteToXml")
+                WriteToXml(user, method);
             else
                 Console.WriteLine("WrongChoice");
         }
@@ -190,15 +229,15 @@ namespace DBM
         public void WriteToXml(string user, string file2)
         {
             string text = string.Format(" User {0} succesfully accessed {1}", user, file2);
-           
-            var path = @"C:\Users\Ervin\Desktop\CLS\CentralizedLoggingService\DBM\bin\Debug\events.xml";
+
+            var path = @"events.xml";
 
             if (System.IO.File.Exists(path)) //Decides if the player has a xml file already
             {
                 //Get data from existing
                 XDocument file = XDocument.Load(path);
                 XElement winTemp = new XElement("playerWin", user);
-               
+
                 ////delete existing file
                 //File.Delete(Path.Combine(path));
 

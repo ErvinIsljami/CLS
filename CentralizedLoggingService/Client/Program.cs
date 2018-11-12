@@ -26,17 +26,18 @@ namespace Client
                     Console.WriteLine(proxy.ViewTree());
                     isConnected = true;
                 }
-                catch
+                catch(Exception e)
                 {
-                    Console.WriteLine("You entered wrong port");
+                    Console.WriteLine("You entered wrong port " + e.Message);
                     continue;
                 }
             } while (!isConnected);
-            
 
+            Console.Clear();
             do
             {
                 int x = 0;
+                
                 Console.WriteLine("Choose:");
                 Console.WriteLine("0.Exit.");
                 Console.WriteLine("1.Create folder.");
@@ -53,6 +54,7 @@ namespace Client
                 catch
                 {
                     Console.Clear();
+                    
                     Console.WriteLine("Input invalid. Please try again.");
                     continue;
                 }
@@ -100,10 +102,12 @@ namespace Client
                         break;
 
                     case 5:
-                        proxy.ViewTree();
+                        Console.Clear();
+                        Console.WriteLine(proxy.ViewTree());
                         break;
 
                     case 6:
+                        Console.Clear();
                         Console.WriteLine("Input path and name of file you want to write to.");
                         string name_and_path = Console.ReadLine();
                         Console.WriteLine("Input text");
@@ -112,6 +116,7 @@ namespace Client
                         break;
 
                     case 7:
+                        Console.Clear();
                         Console.WriteLine("Input path and name of file you want to edit.");
                         string name_and_path2 = Console.ReadLine();
                         Console.WriteLine("Input text");

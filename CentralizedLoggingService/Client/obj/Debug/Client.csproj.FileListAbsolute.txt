@@ -18,3 +18,13 @@ C:\Users\Ervin\Desktop\CLS\CentralizedLoggingService\Client\obj\Debug\Client.csp
 C:\Users\Ervin\Desktop\CLS\CentralizedLoggingService\Client\obj\Debug\Client.csproj.CopyComplete
 C:\Users\Ervin\Desktop\CLS\CentralizedLoggingService\Client\obj\Debug\Client.exe
 C:\Users\Ervin\Desktop\CLS\CentralizedLoggingService\Client\obj\Debug\Client.pdb
+C:\Users\HP\Desktop\CLS\CentralizedLoggingService\Client\bin\Debug\Client.exe.config
+C:\Users\HP\Desktop\CLS\CentralizedLoggingService\Client\bin\Debug\Client.exe
+C:\Users\HP\Desktop\CLS\CentralizedLoggingService\Client\bin\Debug\Client.pdb
+C:\Users\HP\Desktop\CLS\CentralizedLoggingService\Client\bin\Debug\Common.dll
+C:\Users\HP\Desktop\CLS\CentralizedLoggingService\Client\bin\Debug\Common.pdb
+C:\Users\HP\Desktop\CLS\CentralizedLoggingService\Client\obj\Debug\Client.csprojAssemblyReference.cache
+C:\Users\HP\Desktop\CLS\CentralizedLoggingService\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
+C:\Users\HP\Desktop\CLS\CentralizedLoggingService\Client\obj\Debug\Client.csproj.CopyComplete
+C:\Users\HP\Desktop\CLS\CentralizedLoggingService\Client\obj\Debug\Client.exe
+C:\Users\HP\Desktop\CLS\CentralizedLoggingService\Client\obj\Debug\Client.pdb

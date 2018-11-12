@@ -17,6 +17,7 @@ namespace DBM
         public static LoggingType type;
         static void Main(string[] args)
         {
+            
             bool isConnected = false;
             do
             {

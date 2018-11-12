@@ -12,8 +12,34 @@ namespace DBM
     {
         protected override bool CheckAccessCore(OperationContext operationContext)
         {
+            
             MyPrincipal pr = operationContext.ServiceSecurityContext.AuthorizationContext.Properties["Principal"] as MyPrincipal;
-            return pr.IsInRole("Read");
+
+            string permitName = null;
+            string operationName = operationContext.IncomingMessageHeaders.Action.Substring(operationContext.IncomingMessageHeaders.Action.LastIndexOf("/", StringComparison.OrdinalIgnoreCase) + 1);
+
+            switch(operationName)
+            {
+                case "DeleteFolder":
+                    permitName = "ManageFolder";
+                    break;
+                case "DeleteFile":
+                    permitName = "ManageFile";
+                    break;
+                case "CreateNewFile":
+                    permitName = "ManageFile";
+                    break;
+                case "CreateNewFolder":
+                    permitName = "ManageFolder";
+                    break;
+                default:
+                    permitName = "Read";
+                    break;
+            }
+                
+            
+
+            return pr.IsInRole(permitName);
         }
     }
 }

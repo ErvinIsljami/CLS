@@ -6,7 +6,6 @@ C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\Manager\obj\Debug\Man
 C:\Users\HP\Desktop\Projakat\CLS\CentralizedLoggingService\Manager\obj\Debug\Manager.pdb
 C:\Users\HP\Desktop\CLS\CentralizedLoggingService\Manager\bin\Debug\Manager.dll
 C:\Users\HP\Desktop\CLS\CentralizedLoggingService\Manager\bin\Debug\Manager.pdb
-C:\Users\HP\Desktop\CLS\CentralizedLoggingService\Manager\obj\Debug\Manager.csprojAssemblyReference.cache
 C:\Users\HP\Desktop\CLS\CentralizedLoggingService\Manager\obj\Debug\Manager.csproj.CoreCompileInputs.cache
 C:\Users\HP\Desktop\CLS\CentralizedLoggingService\Manager\obj\Debug\Manager.dll
 C:\Users\HP\Desktop\CLS\CentralizedLoggingService\Manager\obj\Debug\Manager.pdb

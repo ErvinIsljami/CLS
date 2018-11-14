@@ -35,7 +35,11 @@ namespace CLS
             string sql = SQLHelper.GetSqlCommand(user, method, "NULL", "DBMID");
             SQLHelper.ExecuteCommand(sql);
         }
-        
+        //public void TestCommunication()
+        //{
+        //    Console.WriteLine("Communication established.");
+        //}
+
         //*******************dodati user i pass preko koda**********
         #region adduser
         /*

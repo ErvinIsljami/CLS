@@ -12,26 +12,33 @@ using System.Threading.Tasks;
 
 namespace DBM
 {
-    public class WCFClient:ChannelFactory<IWCFContract>, IWCFContract, IDisposable
+    public class WCFClient: IWCFContract, IDisposable
     {
         IWCFContract factory;
-
+        ChannelFactory<IWCFContract> proxy;
 
         public WCFClient(NetTcpBinding binding, EndpointAddress address)
-            : base(binding, address)
+            
         {
+            proxy = new ChannelFactory<IWCFContract>(binding, address);
             /// cltCertCN.SubjectName should be set to the client's username. .NET WindowsIdentity class provides information about Windows user running the given process
             string cltCertCN = Manager.Formatter.ParseName(WindowsIdentity.GetCurrent().Name);
 
-            this.Credentials.ServiceCertificate.Authentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.Custom;
-            this.Credentials.ServiceCertificate.Authentication.CustomCertificateValidator = new ClientCertValidator();
-            this.Credentials.ServiceCertificate.Authentication.RevocationMode = X509RevocationMode.NoCheck;
+            proxy.Credentials.ServiceCertificate.Authentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.Custom;
+            proxy.Credentials.ServiceCertificate.Authentication.CustomCertificateValidator = new ClientCertValidator();
+            proxy.Credentials.ServiceCertificate.Authentication.RevocationMode = X509RevocationMode.NoCheck;
 
             /// Set appropriate client's certificate on the channel. Use CertManager class to obtain the certificate based on the "cltCertCN"
-            this.Credentials.ClientCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "wcfclient");
+            proxy.Credentials.ClientCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "wcfclient");
 
-            factory = this.CreateChannel();
+            factory = proxy.CreateChannel();
         }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
         public void TestCommunication()
         {
             try

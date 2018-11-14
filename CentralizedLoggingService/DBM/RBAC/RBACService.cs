@@ -51,7 +51,7 @@ namespace DBM.RBAC
             }
             catch(Exception e)
             {
-                Console.WriteLine("IZ RBACA"+e.Message.ToString());
+                Console.WriteLine(e.Message.ToString());
             }
 
             return null;

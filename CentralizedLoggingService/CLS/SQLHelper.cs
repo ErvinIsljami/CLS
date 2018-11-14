@@ -63,6 +63,7 @@ namespace CLS
 
             return ret;
         }
+
         public static int GetCritcalLevel(string method, string errorMsg, string N, int M)
         {
             // time = 2/30
@@ -73,8 +74,8 @@ namespace CLS
 
             timemin = timemin.AddMinutes((Int32.Parse(minutes[0])) * -1);
             timemin = timemin.AddSeconds((Int32.Parse(minutes[1])) * -1);
-            string crtlvl = "SELECT *(DISTINCT " + method +") FROM " + databaseName + 
-                " WHERE " + errorMsg + " IS NOT NULL AND DateTime >= '"+timemin.ToString()+"' AND DateTime <= '"+timenow.ToString()+"';";
+            string crtlvl = "SELECT * FROM " + databaseName +
+                " WHERE method is " + method + " and " + errorMsg + " IS NOT NULL AND DateTime >= '"+timemin.ToString()+"' AND DateTime <= '"+timenow.ToString()+"';";
             SQLiteCommand command = new SQLiteCommand(crtlvl, m_dbConnection);
 
             int a = command.ExecuteNonQuery();
@@ -86,8 +87,8 @@ namespace CLS
     }
 }
 
-/* N = 3;
- * M = 2;
+/* N = 0/30;
+ * M = 3;
  * ervin write cannotwrite 12:00 - low
  * ervin write cannotwrite 12:02 - medium
  * ervin write cannotwrite 12:02 - medium

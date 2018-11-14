@@ -64,7 +64,7 @@ namespace CLS
             string srvCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name);
 
             NetTcpBinding binding = new NetTcpBinding();
-            string address = "net.tcp://localhost:12005/CLS";
+            string address = "net.tcp://localhost:10005/CLS";
 
             binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
 

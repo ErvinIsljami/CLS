@@ -22,7 +22,7 @@ using System.Xml.Linq;
 
 namespace DBM
 {
-    public class Services : IServices, IWCFContract
+    public class Services : IServices
     {
         private string path = "..\\..\\..\\root";
         public static string user = null;

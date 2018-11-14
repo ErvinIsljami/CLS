@@ -115,7 +115,7 @@ namespace DBM
             binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
           //  ChannelFactory<ILogger> factory = new
           //// ChannelFactory<ILogger>(binding, 
-           EndpointAddress address=new EndpointAddress(new Uri("net.tcp://localhost:12005/CLS"), new X509CertificateEndpointIdentity(srvCert));
+           EndpointAddress address=new EndpointAddress(new Uri("net.tcp://localhost:10005/CLS"), new X509CertificateEndpointIdentity(srvCert));
 
             using (WCFClient proxy = new WCFClient(binding, address))
             {

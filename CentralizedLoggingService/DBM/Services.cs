@@ -22,7 +22,7 @@ using System.Xml.Linq;
 
 namespace DBM
 {
-    public class Services : IServices
+    public class Services : IServices, IWCFContract
     {
         private string path = "..\\..\\..\\root";
         public static string user = null;
@@ -70,12 +70,12 @@ namespace DBM
             try
             {
                 Directory.CreateDirectory(path + "\\" + name);
-                //Program.proxy.LogSuccessfulEvent(user, "CreateNewFolder");
+               // Program.proxy.LogSuccessfulEvent(user, "CreateNewFolder");
                 DecideForSuccessful(Program.type, "CreateNewFolder");
             }
             catch (Exception e)
             {
-                //Program.proxy.LogErrorEvent(user, "CreateNewFolder", e.Message.ToString());
+               // Program.proxy.LogErrorEvent(user, "CreateNewFolder", e.Message.ToString());
                 DecideForUnSuccessful(Program.type, "CreateNewFile", e.Message);
                 throw new Exception(e.Message.ToString());
             }
@@ -118,7 +118,7 @@ namespace DBM
             }
             catch (Exception e)
             {
-                //Program.proxy.LogErrorEvent(user, "DeleteFolder", e.Message.ToString());
+               // Program.proxy.LogErrorEvent(user, "DeleteFolder", e.Message.ToString());
                 DecideForUnSuccessful(Program.type, "DeleteFolder", e.Message);
                 throw new Exception(e.Message.ToString());
             }

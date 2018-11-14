@@ -47,6 +47,7 @@
     <Compile Include="AuthorizationException.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="IServices.cs" />
+    <Compile Include="IWCFContract.cs" />
     <Compile Include="LoggingType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

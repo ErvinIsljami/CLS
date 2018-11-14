@@ -21,6 +21,7 @@ namespace DBM.RBAC
         private static readonly Dictionary<string, HashSet<Permission>> GroupPermissionsMapping = new Dictionary<string, HashSet<Permission>>();
         private static PrincipalContext context = new PrincipalContext(ContextType.Machine);
         private static Dictionary<string, List<Permission>> configuration;
+
         public static bool CheckPermission(string group, Permission permission)
         {
             HashSet<Permission> groupPermissions;
@@ -75,7 +76,7 @@ namespace DBM.RBAC
         {
             List<Group> groups;
             XmlSerializer serializer = new XmlSerializer(typeof(List<Group>));
-            //ccccchangeee
+            
             using (FileStream fs = File.Open(@"..\..\UserAccessConfig.xml", FileMode.OpenOrCreate))
             {
                 groups = serializer.Deserialize(fs) as List<Group>;

@@ -19,23 +19,28 @@ namespace CLS
         static void Main(string[] args)
         {
 
-           host = HostServices();
-            
-           // string srvCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name);
-           // host.Credentials.ClientCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
-           // host.Credentials.ClientCertificate.Authentication.CustomCertificateValidator = new ServiceCertValidator();
-           //
-           // ///If CA doesn't have a CRL associated, WCF blocks every client because it cannot be validated
-           // host.Credentials.ClientCertificate.Authentication.RevocationMode = X509RevocationMode.NoCheck;
-           //
-           // ///Set appropriate service's certificate on the host. Use CertManager class to obtain the certificate based on the "srvCertCN"
-           // host.Credentials.ServiceCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, srvCertCN);
+         
+
+            host = HostServices();
+
+           // Console.ReadLine();
+            string srvCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name);
+            host.Credentials.ClientCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
+            host.Credentials.ClientCertificate.Authentication.CustomCertificateValidator = new ServiceCertValidator();
+
+            ///If CA doesn't have a CRL associated, WCF blocks every client because it cannot be validated
+            host.Credentials.ClientCertificate.Authentication.RevocationMode = X509RevocationMode.NoCheck;
+
+            ///Set appropriate service's certificate on the host. Use CertManager class to obtain the certificate based on the "srvCertCN"
+            host.Credentials.ServiceCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "wcfservice");
+
             do
             {
                 try
                 {
                     
                     host.Open();
+                    
                 }
                 catch(Exception e)
                 {
@@ -44,9 +49,9 @@ namespace CLS
                 }
             } while (false);
 
-            Logger l = new Logger();
-            l.LogErrorEvent("ervin", "metoda1", "ervinzgreskom");
-            l.LogErrorEvent("ervin2", "metoda2", "ervinzgreskom2");
+            //Logger l = new Logger();
+            //l.LogErrorEvent("ervin", "metoda1", "ervinzgreskom");
+            //l.LogErrorEvent("ervin2", "metoda2", "ervinzgreskom2");
 
             Console.WriteLine("Services is opened. Press <enter> to finish...");
             Console.ReadLine();
@@ -61,12 +66,14 @@ namespace CLS
             NetTcpBinding binding = new NetTcpBinding();
             string address = "net.tcp://localhost:12005/CLS";
 
-           // binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
+            binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
 
-            ServiceHost host = new ServiceHost(typeof(Logger));
-            host.AddServiceEndpoint(typeof(ILogger), binding, address);
+            ServiceHost host = new ServiceHost(typeof(WCFService));
+            host.AddServiceEndpoint(typeof(IWCFContract), binding, address);
 
             return host;
         }
+
+
     }
 }

@@ -1,10 +1,15 @@
 ﻿using Common;
+using Manager;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Policy;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 using System.ServiceModel;
 using System.ServiceModel.Description;
+using System.ServiceModel.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,7 +28,7 @@ namespace DBM
             {
                 try
                 {
-                    //ConnectToCLS();
+                    ConnectToCLS();
                     isConnected = true;
                     Console.WriteLine("Bole se povezao na Gole");
                 }
@@ -98,18 +103,27 @@ namespace DBM
             host.Authorization.ServiceAuthorizationManager = new MyAuthorizationManager();
             host.Authorization.ExternalAuthorizationPolicies = policies.AsReadOnly();
             host.Authorization.PrincipalPermissionMode = PrincipalPermissionMode.Custom;
+
+           
             return host;
         }
 
         public static void ConnectToCLS()
         {
+            X509Certificate2 srvCert = CertManager.GetCertificateFromStorage(StoreName.TrustedPeople, StoreLocation.LocalMachine, "wcfservice");
             var binding = new NetTcpBinding();
-            ChannelFactory<ILogger> factory = new
-           ChannelFactory<ILogger>(binding, new
-           EndpointAddress("net.tcp://localhost:12005/CLS"));
-            proxy = factory.CreateChannel();
-        }
+            binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
+          //  ChannelFactory<ILogger> factory = new
+          //// ChannelFactory<ILogger>(binding, 
+           EndpointAddress address=new EndpointAddress(new Uri("net.tcp://localhost:12005/CLS"), new X509CertificateEndpointIdentity(srvCert));
 
-        
+            using (WCFClient proxy = new WCFClient(binding, address))
+            {
+                /// 1. Communication test
+                proxy.TestCommunication();
+                Console.WriteLine("TestCommunication() finished. Press <enter> to continue ...");
+                Console.ReadLine();
+            }
+        }
     }
 }

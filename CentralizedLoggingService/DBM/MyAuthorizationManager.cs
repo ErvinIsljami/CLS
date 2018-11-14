@@ -37,8 +37,6 @@ namespace DBM
                     break;
             }
                 
-            
-
             return pr.IsInRole(permitName);
         }
     }

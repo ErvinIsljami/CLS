@@ -27,7 +27,8 @@ namespace CLS
             m_dbConnection = new SQLiteConnection("Data Source=" + myDatabaseFileName + ";Version=3;");
             m_dbConnection.Open();
 
-            string sql = "create table if not exist" + databaseName + " (user varchar(20)," +
+            // if not exist
+            string sql = "create table " + databaseName + " (user varchar(20)," +
                 "method varchar(30)," +
                 "errMsg varchar(90)," +
                 "DBMID varchar(50)," +
@@ -37,8 +38,10 @@ namespace CLS
             SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
             command.ExecuteNonQuery();
 
-            N = ConfigurationManager.GetSection("N").ToString();
-            M = Int32.Parse(ConfigurationManager.GetSection("M").ToString());
+            //N = ConfigurationManager.GetSection("N").ToString();
+            //M = Int32.Parse(ConfigurationManager.GetSection("M").ToString());
+            N = "3/30";
+            M = '3' ;
         }
         
 
@@ -70,7 +73,7 @@ namespace CLS
 
             timemin = timemin.AddMinutes((Int32.Parse(minutes[0])) * -1);
             timemin = timemin.AddSeconds((Int32.Parse(minutes[1])) * -1);
-            string crtlvl = "SELECT * (DISTINCT " + method + ") FROM " + databaseName + 
+            string crtlvl = "SELECT *(DISTINCT " + method +") FROM " + databaseName + 
                 " WHERE " + errorMsg + " IS NOT NULL AND DateTime >= '"+timemin.ToString()+"' AND DateTime <= '"+timenow.ToString()+"';";
             SQLiteCommand command = new SQLiteCommand(crtlvl, m_dbConnection);
 
